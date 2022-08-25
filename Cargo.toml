@@ -11,3 +11,6 @@ rocket_contrib = { version = "0.4", features = [ "tera_templates" ] }
 serde = { version = "1.0", features = [ "std", "derive" ] }
 serde_json = "1.0"
 chrono = "0.4"
+md5 = "0.7"
+rand = "0.8"
+home = "0.5"
