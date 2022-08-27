@@ -1,48 +1,58 @@
 <html>
- <div class="telemetry">
-  <div class="title">Temperature:
+ <link rel="stylesheet" type="text/css" href="css/wotah.css">
+ <div class="content">
+ <h1>Wotah controller</h1>
+ <div>
+ <div class="telemetry column">
+  <div class="temperature box"><div class="title">Temperature:</div>
    {%- if telemetry.temperature -%}
-    <div class="temperature">{{ telemetry.temperature }}</div>
+    <div class="value">{{ telemetry.temperature }} C</div>
    {%- else -%}
-    <div class="temperature novalue">N/A</div>
+    <div class="novalue">N/A</div>
    {%- endif -%}
   </div>
-  <div class="title">Water level:
+  <div class="water_level box"><div class="title">Water level:</div>
    {% if telemetry.water_level %}
-    <div class="water_level">{{ telemetry.water_level }}</div>
+    <div class="value">{{ telemetry.water_level }} mm</div>
    {% else %}
-    <div class="water_level novalue">N/A</div>
+    <div class="novalue">N/A</div>
    {% endif %}
   </div>
-  <div class="title">Moisture:
+  <div class="moisture box"><div class="title">Moisture:</div>
    {% if telemetry.moisture %}
-    <div class="moisture">{{ telemetry.moisture }}</div>
+    <div class="value">{{ telemetry.moisture }} %</div>
    {% else %}
-    <div class="moisture novalue">N/A</div>
+    <div class="novalue">N/A</div>
    {% endif %}
   </div>
  </div>
- <div class="watering_status">
-  <div class="title">Last watering time:
-   {%- if last_watering_time -%}
-    <div class="last_watering_time">{{ last_watering_time }}</div>
-   {%- else -%}
-    <div class="last_watering_time novalue">N/A</div>
-   {%- endif -%}
+ <div class="column">
+  <div class="watering_status box">
+   <div class="title">Last watering time:
+    {%- if last_watering_time -%}
+     <div class="last_watering_time">{{ last_watering_time }}</div>
+    {%- else -%}
+     <div class="last_watering_time novalue">N/A</div>
+    {%- endif -%}
+   </div>
+   <div class="title">Last watering status:
+    {%- if last_watering_status -%}
+     <div class="last_watering_status">{{ last_watering_status }}</div>
+    {%- else -%}
+     <div class="last_watering_status novalue">N/A</div>
+    {%- endif -%}
+   </div>
   </div>
-  <div class="title">Last watering status:
-   {%- if last_watering_status -%}
-    <div class="last_watering_status">{{ last_watering_status }}</div>
-   {%- else -%}
-    <div class="last_watering_status novalue">N/A</div>
-   {%- endif -%}
+  <div class="controller box">
+   <a href="update_telemetry">Update Telemetry</a>
+   <form action="request_watering" method="post">
+    <label for="time_s">Water plants for: </label><br>
+    <input type="text" id="time_s" name="time_s"><br>
+    <input type="submit" value="Submit">
+   </form>
   </div>
+  <img class="box picture" src="last_pic.jpeg" alt="Pic not available"></img>
  </div>
- <a href="update_telemetry">Update Telemetry</a>
- <form action="request_watering" method="post">
-  <label for="time_s">Water plants for: </label><br>
-  <input type="text" id="time_s" name="time_s"><br>
-  <input type="submit" value="Submit">
- </form>
- <img src="last_pic.jpeg" alt="Pic not available"></img>
+ </div>
+ </div>
 </html>

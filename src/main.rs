@@ -15,6 +15,7 @@ use rocket::response::{NamedFile, Redirect};
 use rocket::State;
 use rocket_contrib::json;
 use rocket_contrib::json::{Json, JsonValue};
+use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::templates::Template;
 use serde::{Deserialize, Serialize};
 use std::cmp::Ordering;
@@ -251,20 +252,21 @@ fn main() {
         username,
         password,
     };
+
+    let routes = routes![
+        commands,
+        telemetry,
+        website,
+        login,
+        watering_status,
+        last_pic,
+        update_telemetry,
+        request_watering,
+    ];
+
     rocket::ignite()
-        .mount(
-            "/",
-            routes![
-                commands,
-                telemetry,
-                website,
-                login,
-                watering_status,
-                last_pic,
-                update_telemetry,
-                request_watering
-            ],
-        )
+        .mount("/", routes)
+        .mount("/css", StaticFiles::from("css"))
         .manage(Mutex::new(data))
         .attach(Template::fairing())
         .launch();
